@@ -383,6 +383,45 @@
     .cd-num { font-size: 1.4rem; font-weight: 700; color: #FF5533; line-height: 1; min-width: 2ch; text-align: center; }
     .cd-lbl { font-size: .58rem; text-transform: uppercase; letter-spacing: .1em; color: rgba(255,255,255,.35); }
 
+    /* ── MOBILE GALLERY SLIDER ── */
+    .gallery-mobile { display: none; }
+    @media (max-width: 640px) {
+      .gallery { display: none; }
+      .gallery-mobile {
+        display: block; position: relative;
+        background: #000;
+      }
+      .gallery-slides {
+        display: flex;
+        overflow-x: scroll;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      .gallery-slides::-webkit-scrollbar { display: none; }
+      .gallery-slide {
+        flex: 0 0 100%;
+        scroll-snap-align: start;
+        height: 300px;
+        overflow: hidden;
+      }
+      .gallery-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+      .gallery-dots {
+        position: absolute; bottom: .75rem; left: 50%;
+        transform: translateX(-50%);
+        display: flex; gap: .35rem; align-items: center;
+      }
+      .gdot {
+        width: 7px; height: 7px; border-radius: 50%;
+        background: rgba(255,255,255,.5);
+        transition: all .2s;
+        flex-shrink: 0;
+      }
+      .gdot.active {
+        background: #fff; width: 18px; border-radius: 4px;
+      }
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       .page-layout { grid-template-columns: 1fr; }
@@ -447,6 +486,28 @@
   <a href="#">Prague</a><span class="breadcrumb-sep">›</span>
   <a href="#">Birthday Experiences</a><span class="breadcrumb-sep">›</span>
   <span>Yaoluca's 30th Birthday Weekend</span>
+</div>
+
+<!-- MOBILE GALLERY SLIDER -->
+<div class="gallery-mobile">
+  <div class="gallery-slides" id="gallerySlides">
+    <div class="gallery-slide"><img src="images/IMG_0776_r.jpg" alt="Beach dinner party" /></div>
+    <div class="gallery-slide"><img src="images/51f4c087-0410-4ccf-b138-21bade602d86.JPG" alt="Group of friends" /></div>
+    <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1541849546-216549ae216d?w=800&h=600&fit=crop&auto=format&q=80" alt="Prague" /></div>
+    <div class="gallery-slide"><img src="images/IMG_9656_r.jpg" alt="Night out" /></div>
+    <div class="gallery-slide"><img src="images/1fd18cd6-d440-4d9f-b0e2-16cde593d858.JPG" alt="Friends" /></div>
+    <div class="gallery-slide"><img src="images/IMG_1083_r.jpg" alt="Beach sunset" /></div>
+    <div class="gallery-slide"><img src="images/IMG_7862_r.jpg" alt="Sunset with friends" /></div>
+  </div>
+  <div class="gallery-dots" id="galleryDots">
+    <span class="gdot active"></span>
+    <span class="gdot"></span>
+    <span class="gdot"></span>
+    <span class="gdot"></span>
+    <span class="gdot"></span>
+    <span class="gdot"></span>
+    <span class="gdot"></span>
+  </div>
 </div>
 
 <!-- PHOTO GALLERY -->
@@ -934,6 +995,16 @@
 
   tick();
   setInterval(tick, 1000);
+
+  // Mobile gallery dots
+  const slides = document.getElementById('gallerySlides');
+  const dots = document.querySelectorAll('.gdot');
+  if (slides) {
+    slides.addEventListener('scroll', () => {
+      const idx = Math.round(slides.scrollLeft / slides.offsetWidth);
+      dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+    }, { passive: true });
+  }
 </script>
 </body>
 </html>
