@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yaoluca's 30th Birthday Weekend – Prague | GetYourGuide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary:       #FF5533;
+      --primary-dark:  #E84D2A;
+      --primary-light: #FFF3F0;
+      --text:          #1A1A1A;
+      --text-2:        #595959;
+      --text-3:        #ADADAD;
+      --border:        #E8E8E8;
+      --bg:            #F5F5F5;
+      --white:         #FFFFFF;
+      --green:         #00894A;
+      --green-bg:      #E6F5EE;
+      --star:          #F5A623;
+      --r:             8px;
+      --shadow-sm:     0 1px 4px rgba(0,0,0,.08);
+      --shadow:        0 2px 12px rgba(0,0,0,.10);
+      --shadow-lg:     0 4px 24px rgba(0,0,0,.14);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.55; }
+
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    img { display: block; width: 100%; object-fit: cover; }
+
+    /* ── TOP NAV ── */
+    .topnav {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 200;
+    }
+    .topnav-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; gap: 1.25rem;
+      padding: .85rem 1.5rem;
+    }
+    .gyg-logo { display: block; flex-shrink: 0; line-height: 0; }
+    .nav-search {
+      flex: 1; max-width: 480px;
+      display: flex; align-items: center; gap: .6rem;
+      background: var(--bg); border: 1.5px solid var(--border);
+      border-radius: 24px; padding: .5rem 1rem;
+      font-size: .85rem; color: var(--text-3);
+    }
+    .nav-search svg { flex-shrink: 0; }
+    .nav-links { margin-left: auto; display: flex; gap: 1.5rem; align-items: center; }
+    .nav-links a { font-size: .85rem; font-weight: 500; color: var(--text-2); }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── BREADCRUMB ── */
+    .breadcrumb {
+      max-width: 1200px; margin: 0 auto;
+      padding: .75rem 1.5rem;
+      font-size: .78rem; color: var(--text-3);
+      display: flex; gap: .35rem; align-items: center; flex-wrap: wrap;
+    }
+    .breadcrumb a { color: var(--text-2); }
+    .breadcrumb a:hover { color: var(--primary); text-decoration: underline; }
+    .breadcrumb-sep { color: var(--text-3); }
+
+    /* ── PHOTO GALLERY ── */
+    .gallery {
+      max-width: 1200px; margin: 0 auto 0;
+      padding: 0 1.5rem;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      grid-template-rows: 160px 160px 160px;
+      gap: 4px;
+      border-radius: var(--r);
+      overflow: hidden;
+      position: relative;
+    }
+    .gallery-main {
+      grid-row: 1 / 4;
+      background: #ccc;
+    }
+    .gallery-main img { height: 100%; }
+    .gallery-sub {
+      display: grid;
+      grid-row: 1 / 4;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
+      gap: 4px;
+    }
+    .gallery-sub-img {
+      background: #bbb;
+      overflow: hidden;
+    }
+    .gallery-sub-img img { height: 100%; }
+    .gallery-btn {
+      position: absolute; bottom: 1rem; right: 1rem;
+      background: var(--white); border: 1.5px solid var(--border);
+      border-radius: 6px; padding: .45rem .9rem;
+      font-size: .8rem; font-weight: 600;
+      display: flex; align-items: center; gap: .4rem;
+      cursor: pointer; box-shadow: var(--shadow-sm);
+    }
+
+    /* ── PAGE LAYOUT ── */
+    .page-layout {
+      max-width: 1200px; margin: 0 auto;
+      padding: 1.5rem 1.5rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    /* ── MAIN COLUMN ── */
+    .main-col { min-width: 0; }
+
+    /* title block */
+    .act-category {
+      font-size: .75rem; font-weight: 600; color: var(--primary);
+      text-transform: uppercase; letter-spacing: .06em;
+      margin-bottom: .5rem;
+    }
+    .act-title {
+      font-size: 1.65rem; font-weight: 700; line-height: 1.2;
+      margin-bottom: .75rem;
+    }
+    .act-rating {
+      display: flex; align-items: center; gap: .5rem;
+      font-size: .9rem; margin-bottom: 1rem; flex-wrap: wrap;
+    }
+    .stars { color: var(--star); letter-spacing: 1px; }
+    .rating-score { font-weight: 700; color: var(--text); }
+    .rating-count { color: var(--text-2); }
+    .rating-sep { color: var(--border); }
+    .act-location { display: flex; align-items: center; gap: .3rem; color: var(--text-2); font-size: .85rem; }
+
+    /* key badges */
+    .key-badges {
+      display: flex; flex-wrap: wrap; gap: .6rem;
+      padding: 1.25rem 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1.75rem;
+    }
+    .badge {
+      display: flex; align-items: center; gap: .45rem;
+      background: var(--white); border: 1.5px solid var(--border);
+      border-radius: 24px; padding: .35rem .85rem;
+      font-size: .8rem; font-weight: 500; color: var(--text);
+    }
+    .badge svg { color: var(--text-2); flex-shrink: 0; }
+    .badge-free { border-color: var(--green); background: var(--green-bg); color: var(--green); }
+    .badge-free svg { color: var(--green); }
+
+    /* sections */
+    .section { margin-bottom: 2rem; }
+    .section-title {
+      font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;
+      padding-bottom: .6rem; border-bottom: 1px solid var(--border);
+    }
+    .section-body { color: var(--text-2); line-height: 1.75; font-size: .93rem; }
+    .section-body p + p { margin-top: .75rem; }
+
+    /* highlights */
+    .highlights { display: flex; flex-direction: column; gap: .6rem; }
+    .highlight-item {
+      display: flex; gap: .75rem; align-items: flex-start;
+      font-size: .9rem; color: var(--text);
+    }
+    .highlight-dot {
+      width: 20px; height: 20px; border-radius: 50%;
+      background: var(--primary-light);
+      flex-shrink: 0; margin-top: 1px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .highlight-dot::after {
+      content: ''; width: 7px; height: 7px;
+      background: var(--primary); border-radius: 50%;
+    }
+
+    /* itinerary timeline */
+    .timeline { position: relative; }
+    .timeline::before {
+      content: ''; position: absolute; left: 15px; top: 28px; bottom: 28px;
+      width: 2px; background: var(--border);
+    }
+    .timeline-item {
+      display: flex; gap: 1.25rem; margin-bottom: 1.5rem; position: relative;
+    }
+    .timeline-num {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--primary); color: #fff;
+      font-size: .75rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; z-index: 1;
+    }
+    .timeline-content { flex: 1; }
+    .timeline-label {
+      font-size: .7rem; font-weight: 600; color: var(--primary);
+      text-transform: uppercase; letter-spacing: .06em; margin-bottom: .25rem;
+    }
+    .timeline-name { font-weight: 600; font-size: .95rem; margin-bottom: .3rem; }
+    .timeline-desc { font-size: .87rem; color: var(--text-2); line-height: 1.65; }
+    .timeline-price {
+      display: inline-flex; align-items: center; gap: .3rem;
+      margin-top: .5rem;
+      font-size: .75rem; font-weight: 600;
+      color: var(--green); background: var(--green-bg);
+      padding: .2rem .6rem; border-radius: 20px;
+    }
+    .timeline-content-inner { display: flex; gap: 1rem; align-items: flex-start; }
+    .timeline-content-inner .timeline-text { flex: 1; min-width: 0; }
+    .timeline-thumb {
+      width: 110px; height: 110px; flex-shrink: 0;
+      border-radius: 8px; object-fit: cover;
+      border: 2px solid var(--border);
+    }
+    @media (max-width: 480px) { .timeline-thumb { width: 80px; height: 80px; } }
+
+    /* included/excluded */
+    .incl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .incl-list { display: flex; flex-direction: column; gap: .5rem; }
+    .incl-heading { font-size: .82rem; font-weight: 700; color: var(--text); margin-bottom: .5rem; text-transform: uppercase; letter-spacing: .05em; }
+    .incl-item { display: flex; gap: .6rem; align-items: flex-start; font-size: .87rem; color: var(--text-2); }
+    .incl-icon { width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; font-size: .65rem; font-weight: 800; }
+    .incl-icon.yes { background: var(--green-bg); color: var(--green); }
+    .incl-icon.no  { background: #F5F5F5; color: var(--text-3); }
+
+    /* important info */
+    .info-list { display: flex; flex-direction: column; gap: .75rem; }
+    .info-item { display: flex; gap: .75rem; align-items: flex-start; font-size: .87rem; }
+    .info-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+    .info-label { font-weight: 600; margin-bottom: .15rem; font-size: .85rem; }
+    .info-value { color: var(--text-2); line-height: 1.5; }
+
+    /* meeting point */
+    .meeting-map {
+      height: 160px; background: #e8e8e8;
+      border-radius: var(--r); margin-bottom: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .85rem; color: var(--text-3); font-weight: 500;
+      background-image: url('https://images.unsplash.com/photo-1592906209472-a36b1f3782ef?w=800&h=300&fit=crop&auto=format&q=60');
+      background-size: cover; background-position: center;
+      position: relative; overflow: hidden;
+    }
+    .meeting-map::after {
+      content: '📍 Prague, Czechia';
+      position: absolute; bottom: .75rem; left: .75rem;
+      background: var(--white); padding: .35rem .75rem;
+      border-radius: 6px; font-size: .8rem; font-weight: 600; color: var(--text);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* reviews */
+    .reviews-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 1.25rem;
+    }
+    .reviews-summary {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding: 1rem; background: var(--white);
+      border: 1px solid var(--border); border-radius: var(--r);
+    }
+    .reviews-big-num {
+      font-size: 3rem; font-weight: 700; line-height: 1; color: var(--text);
+    }
+    .reviews-stars-label { font-size: .8rem; color: var(--text-2); margin-top: .25rem; }
+    .review-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .review-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 1rem;
+    }
+    .reviewer { display: flex; align-items: center; gap: .65rem; margin-bottom: .6rem; }
+    .reviewer-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--primary); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .85rem; font-weight: 700; flex-shrink: 0;
+    }
+    .reviewer-name { font-weight: 600; font-size: .87rem; }
+    .reviewer-date { font-size: .75rem; color: var(--text-3); }
+    .review-stars { color: var(--star); font-size: .8rem; margin-bottom: .4rem; }
+    .review-text { font-size: .85rem; color: var(--text-2); line-height: 1.6; }
+
+    /* ── BOOKING WIDGET ── */
+    .booking-col { position: sticky; top: 70px; }
+    .booking-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--r); box-shadow: var(--shadow-lg);
+      overflow: hidden;
+    }
+    .booking-header {
+      background: var(--primary); color: #fff;
+      padding: 1.25rem 1.25rem .75rem;
+    }
+    .booking-free {
+      font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em;
+      opacity: .85; margin-bottom: .25rem;
+    }
+    .booking-price {
+      font-size: 2rem; font-weight: 700; line-height: 1;
+    }
+    .booking-price-note { font-size: .8rem; opacity: .8; margin-top: .2rem; }
+    .booking-body { padding: 1.25rem; }
+    .booking-deadline {
+      display: flex; align-items: center; gap: .5rem;
+      background: #FFF8E1; border: 1px solid #FFD54F;
+      border-radius: 6px; padding: .55rem .75rem;
+      font-size: .8rem; font-weight: 600; color: #7A5600;
+      margin-bottom: 1rem;
+    }
+    .deadline-dot {
+      width: 8px; height: 8px; background: #F59E0B; border-radius: 50%;
+      flex-shrink: 0; animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(1.3)} }
+
+    .booking-date-row {
+      display: flex; gap: .5rem; margin-bottom: 1rem;
+    }
+    .booking-date-box {
+      flex: 1; border: 1.5px solid var(--border); border-radius: 6px;
+      padding: .6rem .75rem;
+    }
+    .booking-date-label { font-size: .68rem; font-weight: 600; color: var(--text-3); text-transform: uppercase; letter-spacing: .05em; }
+    .booking-date-val { font-size: .9rem; font-weight: 600; margin-top: .15rem; }
+
+    .booking-btn {
+      display: block; width: 100%;
+      background: var(--primary); color: #fff;
+      border: none; border-radius: 6px;
+      padding: .9rem 1rem; font-size: 1rem; font-weight: 700;
+      text-align: center; cursor: pointer;
+      transition: background .2s, transform .1s;
+      margin-bottom: .75rem;
+    }
+    .booking-btn:hover { background: var(--primary-dark); transform: translateY(-1px); }
+
+    .booking-cancellation {
+      display: flex; align-items: center; gap: .4rem;
+      font-size: .78rem; color: var(--green); font-weight: 600;
+      justify-content: center; margin-bottom: 1rem;
+    }
+    .booking-divider { border: none; border-top: 1px solid var(--border); margin: 1rem 0; }
+    .booking-incl-title { font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--text-3); margin-bottom: .6rem; }
+    .booking-incl-list { display: flex; flex-direction: column; gap: .45rem; }
+    .booking-incl-item { display: flex; gap: .5rem; align-items: flex-start; font-size: .82rem; color: var(--text-2); }
+    .bi-check { color: var(--green); font-size: .9rem; flex-shrink: 0; }
+
+    .booking-actions {
+      display: flex; gap: .75rem; margin-top: 1rem;
+      justify-content: center;
+    }
+    .action-btn {
+      display: flex; align-items: center; gap: .35rem;
+      font-size: .8rem; font-weight: 500; color: var(--text-2);
+      background: none; border: 1.5px solid var(--border);
+      border-radius: 6px; padding: .45rem .85rem; cursor: pointer;
+    }
+    .action-btn:hover { border-color: var(--text); color: var(--text); }
+
+    /* ── COUNTDOWN BAR ── */
+    .countdown-bar {
+      background: var(--text); color: #fff;
+      padding: .85rem 1.5rem;
+      display: flex; align-items: center; justify-content: center;
+      gap: 2.5rem; flex-wrap: wrap;
+    }
+    .countdown-label-text { font-size: .75rem; text-transform: uppercase; letter-spacing: .1em; color: rgba(255,255,255,.5); }
+    .countdown-units { display: flex; gap: 1.5rem; }
+    .cd-unit { display: flex; flex-direction: column; align-items: center; gap: .1rem; }
+    .cd-num { font-size: 1.4rem; font-weight: 700; color: #FF5533; line-height: 1; min-width: 2ch; text-align: center; }
+    .cd-lbl { font-size: .58rem; text-transform: uppercase; letter-spacing: .1em; color: rgba(255,255,255,.35); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .page-layout { grid-template-columns: 1fr; }
+      .booking-col { position: static; }
+      .incl-grid { grid-template-columns: 1fr; }
+      .review-cards { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .gallery-grid { grid-template-columns: 1fr; grid-template-rows: 240px; }
+      .gallery-main { grid-row: auto; }
+      .gallery-sub { display: none; }
+      .topnav-inner { padding: .7rem 1rem; }
+      .nav-search, .nav-links { display: none; }
+      .act-title { font-size: 1.35rem; }
+    }
+
+    /* ── MOBILE STICKY FOOTER ── */
+    .mobile-book-bar {
+      display: none;
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 300;
+      background: var(--white); border-top: 1px solid var(--border);
+      padding: .85rem 1.25rem;
+      align-items: center; justify-content: space-between;
+      gap: 1rem;
+    }
+    .mobile-book-bar a { flex: 1; }
+    .mobile-book-btn {
+      display: block; width: 100%;
+      background: var(--primary); color: #fff;
+      border: none; border-radius: 6px;
+      padding: .85rem; font-size: .95rem; font-weight: 700;
+      text-align: center; cursor: pointer;
+    }
+    .mobile-free { font-size: .75rem; color: var(--text-2); }
+    .mobile-free strong { font-size: 1rem; color: var(--text); font-weight: 700; }
+    @media (max-width: 900px) { .mobile-book-bar { display: flex; } body { padding-bottom: 72px; } }
+  </style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="topnav">
+  <div class="topnav-inner">
+    <a href="#" class="gyg-logo">
+      <img src="logo.png" alt="Get Your Yao" style="height:72px;width:auto;display:block;" />
+    </a>
+    <div class="nav-search">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      Prague · Birthday Experiences · 3 days
+    </div>
+    <div class="nav-links">
+      <a href="#itinerary">Itinerary</a>
+      <a href="#fineprint">Fine Print</a>
+      <a href="#rsvp" style="color:var(--primary);font-weight:600">RSVP</a>
+    </div>
+  </div>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="#">Home</a><span class="breadcrumb-sep">›</span>
+  <a href="#">Prague</a><span class="breadcrumb-sep">›</span>
+  <a href="#">Birthday Experiences</a><span class="breadcrumb-sep">›</span>
+  <span>Yaoluca's 30th Birthday Weekend</span>
+</div>
+
+<!-- PHOTO GALLERY -->
+<div class="gallery">
+  <div class="gallery-grid">
+    <div class="gallery-main">
+      <img src="images/IMG_0776_r.jpg" alt="Beach dinner party" />
+    </div>
+    <div class="gallery-sub">
+      <div class="gallery-sub-img">
+        <img src="images/51f4c087-0410-4ccf-b138-21bade602d86.JPG" alt="Group of friends" />
+      </div>
+      <div class="gallery-sub-img">
+        <img src="https://images.unsplash.com/photo-1541849546-216549ae216d?w=400&h=240&fit=crop&auto=format&q=80" alt="Prague" />
+      </div>
+      <div class="gallery-sub-img">
+        <img src="images/IMG_9656_r.jpg" alt="Night out" />
+      </div>
+      <div class="gallery-sub-img">
+        <img src="images/1fd18cd6-d440-4d9f-b0e2-16cde593d858.JPG" alt="Friends on the street" />
+      </div>
+      <div class="gallery-sub-img">
+        <img src="images/IMG_1083_r.jpg" alt="Beach sunset" />
+      </div>
+      <div class="gallery-sub-img">
+        <img src="images/IMG_7862_r.jpg" alt="Sunset with friends" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE LAYOUT -->
+<div class="page-layout">
+
+  <!-- MAIN COLUMN -->
+  <main class="main-col">
+
+    <p class="act-category">Birthday Experience · Prague</p>
+    <h1 class="act-title">Yaoluca's 30th Birthday Weekend — 3-Day Prague Experience</h1>
+
+    <div class="act-rating">
+      <span class="stars">★★★★★</span>
+      <span class="rating-score">5.0</span>
+      <span class="rating-count">(30 reviews — one per year)</span>
+      <span class="rating-sep">·</span>
+      <span class="act-location">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        Prague, Czechia
+      </span>
+    </div>
+
+    <!-- KEY BADGES -->
+    <div class="key-badges">
+      <span class="badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        3 days
+      </span>
+      <span class="badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Small group
+      </span>
+      <span class="badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Any language works
+      </span>
+      <span class="badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Accommodation included
+      </span>
+      <span class="badge badge-free">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        Host-covered activities
+      </span>
+    </div>
+
+    <!-- ABOUT -->
+    <div class="section" id="about">
+      <h2 class="section-title">About this experience</h2>
+      <div class="section-body">
+        <p>
+          Gianluca turns 30 on November 2nd, but proper celebrations don't happen on a Tuesday.
+          They happen on a long weekend in Prague, surrounded by people who actually matter.
+          This is a curated 3-day experience covering accommodation, activities, and whatever
+          moderately questionable decisions follow.
+        </p>
+        <p>
+          Accommodation is fully host-paid. All scheduled activities are covered.
+          You are responsible for getting yourself to Prague and feeding yourself
+          between planned meals. Everything else is handled.
+        </p>
+        <p>
+          No dress code. No agenda beyond the one below. No refunds.
+          No regrets. Probably.
+        </p>
+      </div>
+    </div>
+
+    <!-- HIGHLIGHTS -->
+    <div class="section">
+      <h2 class="section-title">Highlights</h2>
+      <div class="highlights">
+        <div class="highlight-item">
+          <div class="highlight-dot"></div>
+          <span>Airbnb accommodation fully covered — arrive, drop bags, relax</span>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-dot"></div>
+          <span>Six curated activities across three days, all host-paid</span>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-dot"></div>
+          <span>Pork dinner at one of Prague's finest temples of roasted swine</span>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-dot"></div>
+          <span>Kafka Castle visit — architecturally stunning, historically fuzzy</span>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-dot"></div>
+          <span>Morning acroyoga workshop — no experience required, low dignity required</span>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-dot"></div>
+          <span>Underground Prague night experience — location TBD, vibes guaranteed</span>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-dot"></div>
+          <span>Tram #58 to terminus and back — unstructured, philosophical, perfect</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ITINERARY -->
+    <div class="section" id="itinerary">
+      <h2 class="section-title">What you'll do</h2>
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="timeline-num">a</div>
+          <div class="timeline-content">
+            <p class="timeline-label">Friday · Nov 6 — Evening</p>
+            <p class="timeline-name">Arrival &amp; Pork Dinner</p>
+            <p class="timeline-desc">Gather at the Airbnb, settle in, argue about beds. Then: dinner. Proper Prague roasted pork at a place that takes it seriously. Golden, crispy, unapologetic. The only reasonable way to begin a birthday weekend.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-num">b</div>
+          <div class="timeline-content">
+            <p class="timeline-label">Friday · Nov 6 — Night</p>
+            <p class="timeline-name">Kafka Castle Visit</p>
+            <p class="timeline-desc">Gianluca has a Kafka tattoo. He will tell you he knows a lot about Kafka. He does not. But the castle is genuinely stunning at night, and the walk through Prague's old town is worth the mild existential dread.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-num">c</div>
+          <div class="timeline-content">
+            <p class="timeline-label">Saturday · Nov 7 — Morning</p>
+            <p class="timeline-name">Acroyoga &amp; Handstand Workshop</p>
+            <p class="timeline-desc">Morning movement. Getting upside down together. No prior experience necessary — only a tolerance for mild embarrassment and a willingness to trust someone else's feet beneath your hips. Good for the hangover.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-num">d</div>
+          <div class="timeline-content">
+            <div class="timeline-content-inner">
+              <div class="timeline-text">
+                <p class="timeline-label">Saturday · Nov 7 — Evening</p>
+                <p class="timeline-name">Moscow Mule &amp; Ketamine Tour</p>
+                <p class="timeline-desc">Cocktails and a curated evening adventure through Prague's more adventurous side. The itinerary here is deliberately vague. Wear comfortable shoes. Trust the process. Questions will be answered in real time.</p>
+              </div>
+              <img class="timeline-thumb" src="images/eyes_r.jpg" alt="The vibe" />
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-num">e</div>
+          <div class="timeline-content">
+            <div class="timeline-content-inner">
+              <div class="timeline-text">
+                <p class="timeline-label">Sunday · Nov 8 — Night</p>
+                <p class="timeline-name">The Kinky Night Out</p>
+                <p class="timeline-desc">An underground dungeon. Candlelight. Prague's finest subterranean experience. Nobody knows the exact location. Nobody is officially in charge. That is the point. This one is complimentary — some things shouldn't have a price.</p>
+              </div>
+              <img class="timeline-thumb" src="images/IMG_8075_r.jpg" alt="The host, dressed accordingly" />
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-num">f</div>
+          <div class="timeline-content">
+            <div class="timeline-content-inner">
+              <div class="timeline-text">
+                <p class="timeline-label">Sunday · Nov 8 — Afternoon</p>
+                <p class="timeline-name">Tram Ride of Fools</p>
+                <p class="timeline-desc">Tram #58. Terminus. Return. No plan, no guide, no destination beyond the end of the line. Prague happens around you. The perfect ending to an imperfect weekend. Possibly the most meaningful tram ride you'll ever take.</p>
+              </div>
+              <img class="timeline-thumb" src="images/IMG_8934_r.jpg" alt="The host, already on a tram" />
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- INCLUDED / EXCLUDED -->
+    <div class="section" id="fineprint">
+      <h2 class="section-title">What's included</h2>
+      <div class="incl-grid">
+        <div>
+          <p class="incl-heading">Included</p>
+          <div class="incl-list">
+            <div class="incl-item"><span class="incl-icon yes">✓</span><span>2 nights accommodation (Airbnb, Prague)</span></div>
+            <div class="incl-item"><span class="incl-icon yes">✓</span><span>Kafka Castle entry</span></div>
+            <div class="incl-item"><span class="incl-icon yes">✓</span><span>Acroyoga &amp; handstand workshop</span></div>
+            <div class="incl-item"><span class="incl-icon yes">✓</span><span>Moscow Mule &amp; Ketamine tour</span></div>
+            <div class="incl-item"><span class="incl-icon yes">✓</span><span>The Kinky Night Out</span></div>
+            <div class="incl-item"><span class="incl-icon yes">✓</span><span>Mild chaos, curated</span></div>
+          </div>
+        </div>
+        <div>
+          <p class="incl-heading">Not included</p>
+          <div class="incl-list">
+            <div class="incl-item"><span class="incl-icon no">✗</span><span>Flights / trains to Prague</span></div>
+            <div class="incl-item"><span class="incl-icon no">✗</span><span>Pork dinner (Friday evening)</span></div>
+            <div class="incl-item"><span class="incl-icon no">✗</span><span>Tram #58 tickets</span></div>
+            <div class="incl-item"><span class="incl-icon no">✗</span><span>Food outside scheduled meals</span></div>
+            <div class="incl-item"><span class="incl-icon no">✗</span><span>Drinks (beyond the Moscow Mule tour)</span></div>
+            <div class="incl-item"><span class="incl-icon no">✗</span><span>Travel insurance</span></div>
+            <div class="incl-item"><span class="incl-icon no">✗</span><span>Refunds of any kind</span></div>
+            <div class="incl-item"><span class="incl-icon no">✗</span><span>Regrets (probably)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- IMPORTANT INFO -->
+    <div class="section">
+      <h2 class="section-title">Important information</h2>
+      <div class="info-list">
+        <div class="info-item">
+          <span class="info-icon">📅</span>
+          <div>
+            <p class="info-label">Dates</p>
+            <p class="info-value">November 6–8, 2026. Actual birthday is November 2nd — weekends exist for a reason.</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <span class="info-icon">👗</span>
+          <div>
+            <p class="info-label">Dress code</p>
+            <p class="info-value">Whatever you're in. Comfort is encouraged. Judgement is suspended (mostly).</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <span class="info-icon">✈️</span>
+          <div>
+            <p class="info-label">Getting there</p>
+            <p class="info-value">Your responsibility. Get to Prague by Friday evening, November 6th. Václav Havel Airport (PRG) is the closest. Trains and buses work too.</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <span class="info-icon">📋</span>
+          <div>
+            <p class="info-label">RSVP deadline</p>
+            <p class="info-value">September 20, 2026. Confirmation needed to book the Airbnb. Join the WhatsApp group — that's all.</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <span class="info-icon">🚫</span>
+          <div>
+            <p class="info-label">Cancellation policy</p>
+            <p class="info-value">No refunds. No regrets. Probably. If you cancel, you forfeit your spot and the host's goodwill equally.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MEETING POINT -->
+    <div class="section">
+      <h2 class="section-title">Meeting point</h2>
+      <div class="meeting-map"></div>
+      <p style="font-size:.87rem;color:var(--text-2);">Exact Airbnb address shared upon RSVP confirmation. You'll get the full details once you're locked in. Prague city centre area.</p>
+    </div>
+
+    <!-- REVIEWS -->
+    <div class="section" id="reviews">
+      <div class="reviews-header">
+        <h2 class="section-title" style="margin-bottom:0;border:none;padding:0">Reviews</h2>
+      </div>
+      <div class="reviews-summary">
+        <div>
+          <div class="reviews-big-num">5.0</div>
+          <div class="stars" style="font-size:1.1rem">★★★★★</div>
+          <div class="reviews-stars-label">30 reviews — one per year</div>
+        </div>
+        <div style="flex:1;padding-left:1.5rem;">
+          <div style="display:flex;flex-direction:column;gap:.3rem">
+            <div style="display:flex;align-items:center;gap:.6rem;font-size:.8rem;">
+              <span style="color:var(--text-3);width:80px">Organisation</span>
+              <div style="flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:97%;height:100%;background:var(--star);border-radius:3px"></div></div>
+              <span style="font-weight:600">4.9</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:.6rem;font-size:.8rem;">
+              <span style="color:var(--text-3);width:80px">Vibes</span>
+              <div style="flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:100%;height:100%;background:var(--star);border-radius:3px"></div></div>
+              <span style="font-weight:600">5.0</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:.6rem;font-size:.8rem;">
+              <span style="color:var(--text-3);width:80px">Value</span>
+              <div style="flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:100%;height:100%;background:var(--star);border-radius:3px"></div></div>
+              <span style="font-weight:600">5.0</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:.6rem;font-size:.8rem;">
+              <span style="color:var(--text-3);width:80px">Pork quality</span>
+              <div style="flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:100%;height:100%;background:var(--star);border-radius:3px"></div></div>
+              <span style="font-weight:600">5.0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-cards">
+        <div class="review-card">
+          <div class="reviewer">
+            <div class="reviewer-avatar">M</div>
+            <div>
+              <p class="reviewer-name">Gianluca's Mum</p>
+              <p class="reviewer-date">November 2023</p>
+            </div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"He organised everything perfectly. The pork was incredible. I didn't understand half the itinerary but I had the time of my life. Would attend every birthday from now on."</p>
+        </div>
+        <div class="review-card">
+          <div class="reviewer">
+            <div class="reviewer-avatar" style="background:#6B5CE7">F</div>
+            <div>
+              <p class="reviewer-name">Friend from Berlin</p>
+              <p class="reviewer-date">November 2024</p>
+            </div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"I was sceptical about the acroyoga. I shouldn't have been. Prague is unreal. Gianluca somehow managed to pay for everything while also being the most chaotic person in the group. 10/10."</p>
+        </div>
+        <div class="review-card">
+          <div class="reviewer">
+            <div class="reviewer-avatar" style="background:#00894A">K</div>
+            <div>
+              <p class="reviewer-name">Kafka (posthumously)</p>
+              <p class="reviewer-date">Circa 1924</p>
+            </div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"He got the tattoo before reading any of my books. Honestly, I respect the commitment. The castle tour was excellent. Five stars, would haunt again."</p>
+        </div>
+        <div class="review-card">
+          <div class="reviewer">
+            <div class="reviewer-avatar" style="background:#F59E0B">T</div>
+            <div>
+              <p class="reviewer-name">Tram #58 Driver</p>
+              <p class="reviewer-date">November 2025</p>
+            </div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"They sat in silence the whole way to the terminus. Then back. They seemed very happy about it. I did not understand. But I also did not need to. Good passengers. Good people."</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- BOOKING WIDGET -->
+  <aside class="booking-col" id="rsvp">
+    <div class="booking-card">
+      <div class="booking-header">
+        <p class="booking-free">Accommodation · Host-paid</p>
+        <p class="booking-price">Free*</p>
+        <p class="booking-price-note">*Travel &amp; food on you. Everything else: covered.</p>
+      </div>
+      <div class="booking-body">
+
+        <div class="booking-deadline">
+          <span class="deadline-dot"></span>
+          RSVP by Sep 20 &nbsp;·&nbsp; <strong id="rsvp-days">--</strong> days left
+        </div>
+
+        <div class="booking-date-row">
+          <div class="booking-date-box">
+            <p class="booking-date-label">Check-in</p>
+            <p class="booking-date-val">Nov 6, 2026</p>
+          </div>
+          <div class="booking-date-box">
+            <p class="booking-date-label">Check-out</p>
+            <p class="booking-date-val">Nov 8, 2026</p>
+          </div>
+        </div>
+
+        <a href="https://chat.whatsapp.com/IQIuRDqdN4uG2sVWZlYXKo?mode=gi_t" target="_blank" class="booking-btn">
+          RSVP — I'm in
+        </a>
+
+        <div class="booking-cancellation">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Join the WhatsApp group. You're in. Done.
+        </div>
+
+        <div style="text-align:center;margin-top:.75rem;">
+          <p style="font-size:.68rem;color:var(--text-3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem;">Or scan to join</p>
+          <img src="qr-whatsapp.png" alt="WhatsApp QR code" style="width:110px;height:110px;border-radius:6px;border:1px solid var(--border);" />
+        </div>
+
+        <hr class="booking-divider" />
+
+        <p class="booking-incl-title">What you get</p>
+        <div class="booking-incl-list">
+          <div class="booking-incl-item"><span class="bi-check">✓</span><span>2 nights accommodation, Prague</span></div>
+          <div class="booking-incl-item"><span class="bi-check">✓</span><span>Kafka Castle + acroyoga workshop</span></div>
+          <div class="booking-incl-item"><span class="bi-check">✓</span><span>Moscow Mule &amp; Ketamine tour</span></div>
+          <div class="booking-incl-item"><span class="bi-check">✓</span><span>The Kinky Night Out</span></div>
+        </div>
+
+        <hr class="booking-divider" />
+
+        <div class="booking-actions">
+          <button class="action-btn" onclick="navigator.share && navigator.share({title:'Prague Birthday',url:window.location.href})">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            Share
+          </button>
+          <button class="action-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            Save
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- COUNTDOWN below widget -->
+    <div style="margin-top:1rem;background:var(--text);border-radius:var(--r);padding:1.25rem;text-align:center;">
+      <p style="font-size:.65rem;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.4);margin-bottom:.85rem;">Days until the party</p>
+      <div style="display:flex;justify-content:center;gap:1.25rem;">
+        <div class="cd-unit"><span class="cd-num" id="cd-days">--</span><span class="cd-lbl">Days</span></div>
+        <div class="cd-unit"><span class="cd-num" id="cd-hours">--</span><span class="cd-lbl">Hrs</span></div>
+        <div class="cd-unit"><span class="cd-num" id="cd-mins">--</span><span class="cd-lbl">Min</span></div>
+        <div class="cd-unit"><span class="cd-num" id="cd-secs">--</span><span class="cd-lbl">Sec</span></div>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<!-- MOBILE STICKY BOOK BAR -->
+<div class="mobile-book-bar">
+  <div class="mobile-free">
+    <strong>Free*</strong><br>Host-covered
+  </div>
+  <a href="https://chat.whatsapp.com/IQIuRDqdN4uG2sVWZlYXKo?mode=gi_t" target="_blank">
+    <button class="mobile-book-btn">RSVP — I'm in</button>
+  </a>
+</div>
+
+<script>
+  const eventDate    = new Date('2026-11-06T18:00:00');
+  const rsvpDeadline = new Date('2026-09-20T23:59:59');
+
+  function pad(n) { return String(Math.max(0,n)).padStart(2,'0'); }
+
+  function tick() {
+    const now  = new Date();
+    const diff = eventDate - now;
+    if (diff > 0) {
+      document.getElementById('cd-days').textContent  = pad(Math.floor(diff/86400000));
+      document.getElementById('cd-hours').textContent = pad(Math.floor(diff%86400000/3600000));
+      document.getElementById('cd-mins').textContent  = pad(Math.floor(diff%3600000/60000));
+      document.getElementById('cd-secs').textContent  = pad(Math.floor(diff%60000/1000));
+    }
+    const rsvpDiff = rsvpDeadline - now;
+    document.getElementById('rsvp-days').textContent = Math.max(0, Math.ceil(rsvpDiff/86400000));
+  }
+
+  tick();
+  setInterval(tick, 1000);
+</script>
+</body>
+</html>
